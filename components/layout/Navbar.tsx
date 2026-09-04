@@ -40,14 +40,20 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navLinks = [
+    { label: 'Collection', href: '/shop' },
+    { label: 'Discovery Coffret', href: '/shop/discovery-set' },
+    { label: 'The House', href: '/about' },
+  ];
+
   return (
     <>
       {/* Top Banner with Refined Spacing */}
-      <div className="bg-[#0c0d13] border-b border-white/5 text-center py-2 px-4 text-[10px] tracking-[0.25em] uppercase text-neutral-400 font-sans-luxury">
-        <div className="max-w-6xl mx-auto flex items-center justify-center gap-2">
-          <Sparkles className="w-3 h-3 text-[#c5a880] shrink-0" />
-          <span>
-            Complimentary Worldwide Courier on orders over $200 • 2 Bespoke Flacon Samples Included
+      <div className="bg-[#08090e] border-b border-white/5 py-2 px-4 text-[10px] tracking-[0.22em] uppercase text-neutral-400 font-sans-luxury">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-center whitespace-nowrap overflow-x-auto no-scrollbar">
+          <Sparkles className="w-3 h-3 text-[#c5a880] shrink-0 animate-pulse" />
+          <span className="font-light tracking-[0.2em]">
+            Complimentary Worldwide Courier on orders over $200 <span className="text-[#c5a880]/60 mx-1.5">•</span> 2 Bespoke Flacon Samples Included
           </span>
         </div>
       </div>
@@ -56,50 +62,42 @@ export const Navbar: React.FC = () => {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#09090c]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl py-3.5'
-            : 'bg-[#09090c]/90 backdrop-blur-md border-b border-white/5 py-4 sm:py-5'
+            ? 'bg-[#09090c]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl py-3'
+            : 'bg-[#09090c]/90 backdrop-blur-md border-b border-white/5 py-4'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-8">
-          <div className="grid grid-cols-12 items-center">
-            {/* Left Nav (4 Cols) */}
-            <nav className="hidden lg:flex items-center space-x-8 col-span-4">
-              <Link
-                href="/shop"
-                className={`text-[11px] uppercase tracking-[0.2em] font-sans-luxury transition-colors ${
-                  pathname === '/shop'
-                    ? 'text-[#c5a880] font-semibold'
-                    : 'text-neutral-300 hover:text-[#c5a880]'
-                }`}
-              >
-                Collection
-              </Link>
-              <Link
-                href="/shop/discovery-set"
-                className={`text-[11px] uppercase tracking-[0.2em] font-sans-luxury transition-colors ${
-                  pathname === '/shop/discovery-set'
-                    ? 'text-[#c5a880] font-semibold'
-                    : 'text-neutral-300 hover:text-[#c5a880]'
-                }`}
-              >
-                Discovery Coffret
-              </Link>
-              <Link
-                href="/about"
-                className={`text-[11px] uppercase tracking-[0.2em] font-sans-luxury transition-colors ${
-                  pathname === '/about'
-                    ? 'text-[#c5a880] font-semibold'
-                    : 'text-neutral-300 hover:text-[#c5a880]'
-                }`}
-              >
-                The House
-              </Link>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4 lg:gap-8">
+            
+            {/* Left Nav (Desktop) */}
+            <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8 flex-1 justify-start">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`relative text-[11px] xl:text-[11.5px] uppercase tracking-[0.22em] font-sans-luxury whitespace-nowrap transition-all duration-200 py-1 group ${
+                      isActive
+                        ? 'text-[#c5a880] font-medium'
+                        : 'text-neutral-300 hover:text-[#c5a880]'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    <span
+                      className={`absolute bottom-0 left-0 h-[1.5px] bg-[#c5a880] transition-all duration-300 ease-out ${
+                        isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                      }`}
+                    />
+                  </Link>
+                );
+              })}
             </nav>
 
-            {/* Center Brand Logo (4 Cols) */}
-            <div className="col-span-8 lg:col-span-4 text-left lg:text-center">
+            {/* Center Brand Logo */}
+            <div className="flex-shrink-0 flex items-center justify-center">
               <Link href="/" className="inline-flex items-center gap-2.5 sm:gap-3 group">
-                <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-[#c5a880]/30 shadow-lg group-hover:border-[#c5a880] transition-all shrink-0 bg-[#06070a]">
+                <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-[#c5a880]/40 shadow-lg group-hover:border-[#c5a880] transition-all shrink-0 bg-[#06070a]">
                   <Image
                     src="/images/logo.jpeg"
                     alt="Stygian Perfumes Logo"
@@ -109,54 +107,58 @@ export const Navbar: React.FC = () => {
                     priority
                   />
                 </div>
-                <div className="text-left">
-                  <span className="font-serif-luxury text-lg sm:text-2xl tracking-[0.25em] font-medium text-neutral-100 group-hover:text-[#c5a880] transition-colors block leading-tight">
+                <div className="text-left flex flex-col justify-center">
+                  <span className="font-serif-luxury text-base sm:text-xl xl:text-2xl tracking-[0.25em] font-medium text-neutral-100 group-hover:text-[#c5a880] transition-colors leading-none mb-1">
                     STYGIAN
                   </span>
-                  <span className="text-[7px] sm:text-[8px] tracking-[0.4em] uppercase text-[#8c6d48] group-hover:text-[#c5a880] transition-colors block font-light">
+                  <span className="text-[7px] sm:text-[8px] tracking-[0.38em] uppercase text-[#8c6d48] group-hover:text-[#c5a880] transition-colors leading-none font-light">
                     HAUTE PARFUMERIE
                   </span>
                 </div>
               </Link>
             </div>
 
-            {/* Right Utilities (4 Cols) */}
-            <div className="hidden lg:flex items-center justify-end space-x-6 col-span-4">
+            {/* Right Utilities (Desktop) */}
+            <div className="hidden lg:flex items-center justify-end space-x-5 xl:space-x-6 flex-1">
+              {/* Scent Finder Link */}
               <Link
                 href="/quiz"
-                className={`text-[11px] uppercase tracking-[0.2em] font-sans-luxury transition-colors flex items-center gap-1.5 ${
+                className={`group px-3 py-1.5 rounded-full border text-[10.5px] xl:text-[11px] uppercase tracking-[0.18em] font-sans-luxury whitespace-nowrap transition-all duration-300 flex items-center gap-1.5 ${
                   pathname === '/quiz'
-                    ? 'text-[#c5a880] font-semibold'
-                    : 'text-neutral-300 hover:text-[#c5a880]'
+                    ? 'border-[#c5a880] bg-[#c5a880]/10 text-[#c5a880]'
+                    : 'border-white/10 text-neutral-300 hover:border-[#c5a880]/50 hover:text-[#c5a880] bg-white/[0.02]'
                 }`}
               >
-                <Compass className="w-3.5 h-3.5 text-[#c5a880]" />
+                <Compass className="w-3.5 h-3.5 text-[#c5a880] group-hover:rotate-45 transition-transform duration-500" />
                 <span>Scent Finder</span>
               </Link>
 
-              <div className="h-3 w-[1px] bg-white/10" />
+              <div className="h-3.5 w-[1px] bg-white/15" />
 
               {/* Currency Selector */}
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value as Currency)}
-                className="bg-transparent text-[11px] text-neutral-300 hover:text-white uppercase tracking-wider focus:outline-none cursor-pointer pr-1 font-sans-luxury"
-                aria-label="Select currency"
-              >
-                <option value="USD" className="bg-[#12131b] text-white">USD ($)</option>
-                <option value="EUR" className="bg-[#12131b] text-white">EUR (€)</option>
-                <option value="GBP" className="bg-[#12131b] text-white">GBP (£)</option>
-              </select>
+              <div className="relative inline-flex items-center">
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value as Currency)}
+                  className="bg-transparent text-[11px] text-neutral-300 hover:text-white uppercase tracking-widest focus:outline-none cursor-pointer pr-1 font-sans-luxury whitespace-nowrap appearance-none transition-colors"
+                  aria-label="Select currency"
+                >
+                  <option value="USD" className="bg-[#12131b] text-white">USD ($)</option>
+                  <option value="EUR" className="bg-[#12131b] text-white">EUR (€)</option>
+                  <option value="GBP" className="bg-[#12131b] text-white">GBP (£)</option>
+                </select>
+                <span className="text-[8px] text-neutral-400 pointer-events-none ml-1">▼</span>
+              </div>
 
               {/* Wishlist Link */}
               <Link
                 href="/shop?filter=wishlist"
-                className="relative text-neutral-300 hover:text-[#c5a880] transition-colors p-1"
+                className="relative text-neutral-300 hover:text-[#c5a880] transition-colors p-1.5 rounded-full hover:bg-white/5"
                 aria-label="View Wishlist"
               >
                 <Heart className="w-4 h-4" />
                 {wishlistCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#9e2a3b] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 bg-[#9e2a3b] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-md">
                     {wishlistCount}
                   </span>
                 )}
@@ -165,31 +167,31 @@ export const Navbar: React.FC = () => {
               {/* Cart Drawer Button */}
               <button
                 onClick={toggleCart}
-                className="relative text-neutral-200 hover:text-[#c5a880] transition-colors p-1.5 flex items-center gap-2 group"
+                className="relative text-neutral-200 hover:text-[#c5a880] transition-all duration-200 px-3 py-1.5 rounded-full border border-white/10 hover:border-[#c5a880]/50 hover:bg-white/[0.03] flex items-center gap-2 group whitespace-nowrap"
                 aria-label="Open Shopping Bag"
               >
-                <ShoppingBag className="w-4 h-4 text-neutral-200 group-hover:text-[#c5a880]" />
-                <span className="text-[11px] uppercase tracking-wider text-neutral-300 group-hover:text-[#c5a880]">
+                <ShoppingBag className="w-3.5 h-3.5 text-neutral-300 group-hover:text-[#c5a880] transition-colors" />
+                <span className="text-[11px] uppercase tracking-widest text-neutral-300 group-hover:text-[#c5a880]">
                   Bag
                 </span>
-                {cartCount > 0 && (
-                  <span className="bg-[#c5a880] text-black text-[10px] font-bold px-1.5 py-0.2 rounded-full min-w-[18px] text-center shadow">
+                {cartCount > 0 ? (
+                  <span className="bg-[#c5a880] text-black text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[17px] text-center shadow">
                     {cartCount}
                   </span>
-                )}
+                ) : null}
               </button>
             </div>
 
-            {/* Mobile Controls (Right on mobile) */}
-            <div className="col-span-4 flex items-center justify-end space-x-3 lg:hidden">
+            {/* Mobile Controls */}
+            <div className="flex items-center justify-end space-x-2.5 lg:hidden">
               <button
                 onClick={toggleCart}
-                className="relative text-neutral-200 p-1.5"
+                className="relative text-neutral-200 p-2 rounded-full hover:bg-white/5 transition-colors"
                 aria-label="Open Cart"
               >
                 <ShoppingBag className="w-5 h-5" />
                 {cartCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#c5a880] text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className="absolute 0 top-0.5 right-0.5 bg-[#c5a880] text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow">
                     {cartCount}
                   </span>
                 )}
@@ -197,7 +199,7 @@ export const Navbar: React.FC = () => {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-1.5 text-neutral-300 hover:text-white"
+                className="p-2 text-neutral-300 hover:text-white rounded-full hover:bg-white/5 transition-colors"
                 aria-label="Toggle navigation menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -208,48 +210,60 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-white/10 bg-[#0a0b10] px-6 py-6 space-y-4 animate-fade-in">
+          <div className="lg:hidden border-t border-white/10 bg-[#0a0b10]/95 backdrop-blur-2xl px-6 py-6 space-y-5 animate-fade-in">
             <nav className="flex flex-col space-y-4">
               <Link
                 href="/shop"
                 onClick={() => setMobileMenuOpen(false)}
-                className="font-serif-luxury text-sm tracking-widest uppercase text-neutral-200 hover:text-[#c5a880] transition-colors py-1"
+                className={`font-serif-luxury text-sm tracking-widest uppercase py-1 transition-colors ${
+                  pathname === '/shop' ? 'text-[#c5a880]' : 'text-neutral-200 hover:text-[#c5a880]'
+                }`}
               >
                 The Collection
               </Link>
               <Link
                 href="/shop/discovery-set"
                 onClick={() => setMobileMenuOpen(false)}
-                className="font-serif-luxury text-sm tracking-widest uppercase text-neutral-200 hover:text-[#c5a880] transition-colors py-1"
+                className={`font-serif-luxury text-sm tracking-widest uppercase py-1 transition-colors ${
+                  pathname === '/shop/discovery-set' ? 'text-[#c5a880]' : 'text-neutral-200 hover:text-[#c5a880]'
+                }`}
               >
-                The Discovery Coffret
+                Discovery Coffret
               </Link>
               <Link
                 href="/quiz"
                 onClick={() => setMobileMenuOpen(false)}
-                className="font-serif-luxury text-sm tracking-widest uppercase text-neutral-200 hover:text-[#c5a880] transition-colors py-1"
+                className={`font-serif-luxury text-sm tracking-widest uppercase py-1 transition-colors flex items-center gap-2 ${
+                  pathname === '/quiz' ? 'text-[#c5a880]' : 'text-neutral-200 hover:text-[#c5a880]'
+                }`}
               >
-                Scent Matchmaker
+                <Compass className="w-4 h-4 text-[#c5a880]" />
+                <span>Scent Finder</span>
               </Link>
               <Link
                 href="/about"
                 onClick={() => setMobileMenuOpen(false)}
-                className="font-serif-luxury text-sm tracking-widest uppercase text-neutral-200 hover:text-[#c5a880] transition-colors py-1"
+                className={`font-serif-luxury text-sm tracking-widest uppercase py-1 transition-colors ${
+                  pathname === '/about' ? 'text-[#c5a880]' : 'text-neutral-200 hover:text-[#c5a880]'
+                }`}
               >
                 The House
               </Link>
             </nav>
 
             <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs text-neutral-400">
-              <select
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value as Currency)}
-                className="bg-transparent text-xs text-neutral-300 uppercase tracking-wider focus:outline-none"
-              >
-                <option value="USD" className="bg-[#12131b] text-white">USD ($)</option>
-                <option value="EUR" className="bg-[#12131b] text-white">EUR (€)</option>
-                <option value="GBP" className="bg-[#12131b] text-white">GBP (£)</option>
-              </select>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] uppercase text-neutral-500 tracking-wider">Currency:</span>
+                <select
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value as Currency)}
+                  className="bg-transparent text-xs text-neutral-200 uppercase tracking-wider focus:outline-none cursor-pointer"
+                >
+                  <option value="USD" className="bg-[#12131b] text-white">USD ($)</option>
+                  <option value="EUR" className="bg-[#12131b] text-white">EUR (€)</option>
+                  <option value="GBP" className="bg-[#12131b] text-white">GBP (£)</option>
+                </select>
+              </div>
 
               <Link
                 href="/shop?filter=wishlist"
