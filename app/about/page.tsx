@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { Sparkles, ArrowRight, ShieldCheck, Feather, Moon, Flame } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Feather, Moon, Flame } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'The House & Artisanal Alchemy | Stygian Haute Parfumerie',

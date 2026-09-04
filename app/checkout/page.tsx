@@ -9,11 +9,9 @@ import confetti from 'canvas-confetti';
 import {
   ShieldCheck,
   Lock,
-  Truck,
   Gift,
   ArrowRight,
   CheckCircle2,
-  Sparkles,
   CreditCard,
   ShoppingBag,
   ArrowLeft,
@@ -22,9 +20,7 @@ import {
 export default function CheckoutPage() {
   const {
     items,
-    selectedSampleId,
     giftBoxIncluded,
-    giftMessage,
     appliedPromo,
     getSubtotal,
     getDiscountAmount,
@@ -94,7 +90,7 @@ export default function CheckoutPage() {
         origin: { y: 0.5 },
         colors: ['#c5a880', '#e4caa4', '#9d6381', '#ffffff'],
       });
-    } catch (e) {
+    } catch {
       // ignore
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });

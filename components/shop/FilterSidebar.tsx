@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { FRAGRANCE_FAMILIES } from '@/data/products';
-import { Filter, X, RotateCcw, Flame } from 'lucide-react';
+import { Filter, RotateCcw } from 'lucide-react';
 
 interface FilterSidebarProps {
   selectedFamily: string;

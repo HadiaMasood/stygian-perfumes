@@ -13,8 +13,6 @@ import {
   ArrowRight,
   RotateCcw,
   ShoppingBag,
-  Star,
-  Check,
 } from 'lucide-react';
 
 interface Question {
@@ -184,7 +182,7 @@ export default function QuizPage() {
           origin: { y: 0.6 },
           colors: ['#c5a880', '#e4caa4', '#9d6381', '#ffffff'],
         });
-      } catch (e) {
+      } catch {
         // ignore
       }
     }

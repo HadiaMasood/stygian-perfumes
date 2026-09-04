@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { PRODUCTS } from '@/data/products';
 import { useCartStore } from '@/store/useCartStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
-import { Sparkles, ShoppingBag, ShieldCheck, Gift } from 'lucide-react';
+import { Sparkles, ShoppingBag, ShieldCheck } from 'lucide-react';
 
 export const DiscoverySection: React.FC = () => {
   const discoveryProduct = PRODUCTS.find((p) => p.slug === 'discovery-set') || PRODUCTS[0];

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Product, VolumeOption } from '@/data/products';
 import { useCartStore } from '@/store/useCartStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
-import { X, ShoppingBag, ArrowRight, Star, ShieldCheck, Sparkles } from 'lucide-react';
+import { X, ShoppingBag, ArrowRight, Star, Sparkles } from 'lucide-react';
 
 interface QuickViewModalProps {
   product: Product | null;
