@@ -75,7 +75,7 @@ export const BrandEthos: React.FC = () => {
         <div className="glass-card rounded-3xl p-8 sm:p-14 text-center max-w-3xl mx-auto space-y-5 shadow-2xl border-[#c5a880]/20">
           <span className="text-[#c5a880] text-3xl font-serif-luxury block">“</span>
           <p className="font-serif-luxury text-lg sm:text-2xl text-neutral-200 italic font-light leading-relaxed">
-            A fragrance should not simply announce your arrival. It should haunt the room long after your departure like a forbidden memory.
+            A fragrance should not simply announce your arrival; it should captivate the senses and leave an unforgettable signature long after you depart.
           </p>
           <div className="text-xs uppercase tracking-[0.25em] text-[#8c6d48] font-medium pt-2">
             — Master Parfumeur, Stygian Atelier
